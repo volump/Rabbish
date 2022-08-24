@@ -1,0 +1,44 @@
+#spring:
+#  profiles:
+#    active: test
+server:
+  port: 8090
+  servlet:
+    context-path: /mvc
+
+
+  #设置FreeMaker视图配置
+  freemarker:
+    #    freemarker页面存放的目录
+    template-loader-path: classpath*:/templates
+    #    freeMarker页面的后缀
+    suffix: .ftl
+    #    freemarker页面的编码格式
+    charset: utf-8
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.mchange.v2.c3p0.ComboPooledDataSource
+    url: jdbc:mysql://localhost:3306/spring_mybatis?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&useSSL=false
+    username: root
+    password: 123456
+
+    mvc:
+      servlet:
+        load-on-startup: 1
+
+#mybatis配置
+mybatis:
+  mapper-locations: classpath:/mappers/*.xml
+  type-aliases-package: com.wgy.po
+  configuration:
+    #        下划线转驼峰
+    map-underscore-to-camel-case: true
+
+pagehelper:
+  auto-dialect: mysql
+
+logging:
+    level:
+        com.wgy.dao: debug
