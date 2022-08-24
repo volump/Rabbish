@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/loginback3"
+    tools:context=".mainpage.SettingActivity">
+
+    <TextView
+        android:id="@+id/titleText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="个人中心"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/titleText"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <LinearLayout
+
+            android:id="@+id/persion"
+            android:layout_width="match_parent"
+            android:layout_height="156dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <ImageView
+                android:layout_width="104dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:src="@drawable/myheader" />
+
+            <ImageView
+                android:id="@+id/per"
+                android:layout_width="159dp"
+                android:layout_height="121dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/person1" />
+        </LinearLayout>
+    <LinearLayout
+        android:id="@+id/personpicture"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    </LinearLayout>
+        //设置
+        <LinearLayout
+            android:id="@+id/column3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="#676767" />
+
+            <LinearLayout
+
+                android:id="@+id/agreement"
+                android:layout_width="match_parent"
+                android:layout_height="62dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <ImageView
+                    android:id="@+id/user_delete"
+                    android:layout_width="69dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/icon4" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingStart="20dp"
+                    android:text="注销用户"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.2dp"
+                android:background="#676767"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_70"
+                android:orientation="horizontal"
+                android:clickable="true"
+                android:focusable="true"
+                android:id="@+id/applyRight"
+                android:padding="10dp">
+
+                <ImageView
+                    android:id="@+id/setting_user_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon5"
+                    android:layout_gravity="center_vertical"/>
+
+                <TextView
+                    android:paddingStart="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/black"
+                    android:text="设置信息"/>
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.2dp"
+                android:background="#676767"/>
+
+            <LinearLayout
+                android:id="@+id/Exit"
+                android:layout_width="match_parent"
+                android:layout_height="78dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <ImageView
+                    android:id="@+id/Exit1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/icon6" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingStart="20dp"
+                    android:text="退出登录"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.2dp"
+                android:background="#676767"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="137dp"
+            android:layout_height="45dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+        </LinearLayout>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btn_history"
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginStart="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_160"
+            android:layout_marginEnd="@dimen/dp_20"
+            android:layout_marginBottom="@dimen/dp_0"
+            android:onClick="jumpHistory"
+            android:src="@mipmap/icon_history"
+
+            app:backgroundTint="@color/white_50"
+            app:backgroundTintMode="screen"
+            app:fabSize="mini"
+            app:hoveredFocusedTranslationZ="@dimen/dp_18"
+            app:pressedTranslationZ="@dimen/dp_18" />
+
+
+    </LinearLayout>
+    <!--浮动按钮 历史记录-->
+
+</RelativeLayout>

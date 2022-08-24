@@ -1,0 +1,112 @@
+import java.security.MessageDigest
+
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+    defaultConfig {
+        applicationId "com.llw.goodtrash"
+        minSdkVersion 21
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        lintOptions { checkReleaseBuilds false }
+    }
+    buildTypes {
+        release {
+            buildConfigField "int", 'VERSION_CODE', String.valueOf(1)
+            buildConfigField 'String', 'VERSION_NAME', "\"" + "1.0.0" + "\""
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+
+    //修改APP加载资源目录
+    sourceSets {
+        main {
+            jniLibs.srcDir 'libs'
+            jni.srcDirs = []    //disable automatic ndk-build
+        }
+    }
+
+    // 自定义打包名称
+    android.applicationVariants.all { variant ->
+        variant.outputs.all {
+            outputFileName = "GoodTrash${versionName}.apk"
+        }
+    }
+
+
+}
+
+dependencies {
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(path: ':mvplibrary')
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+
+    androidTestImplementation 'org.testng:testng:6.9.6'
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation 'androidx.appcompat:appcompat:1.0.0-alpha1'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.2'
+}
+
+
+def archives = [
+        [
+                'src' : 'https://paddlelite-demo.bj.bcebos.com/libs/android/paddle_lite_libs_v2_10_rc.tar.gz',
+                'dest': 'PaddleLite'
+        ],
+        [
+                'src' : 'https://paddlelite-demo.bj.bcebos.com/libs/android/opencv-4.2.0-android-sdk.tar.gz',
+                'dest': 'OpenCV'
+        ],
+        [
+                'src' : 'https://paddlelite-demo.bj.bcebos.com/models/yolov3_mobilenet_v3_prune86_FPGM_320_fp32_for_cpu_v2_10_rc.tar.gz',
+                'dest' : 'src/main/assets/models/yolov3_mobilenet_v3_for_cpu'
+        ]
+]
+
+task downloadAndExtractArchives(type: DefaultTask) {
+    doFirst {
+        println "Downloading and extracting archives including libs and models"
+    }
+    doLast {
+        // Prepare cache folder for archives
+        String cachePath = "cache"
+        if (!file("${cachePath}").exists()) {
+            mkdir "${cachePath}"
+        }
+        archives.eachWithIndex { archive, index ->
+            MessageDigest messageDigest = MessageDigest.getInstance('MD5')
+            messageDigest.update(archive.src.bytes)
+            String cacheName = new BigInteger(1, messageDigest.digest()).toString(32)
+            // Download the target archive if not exists
+            boolean copyFiles = !file("${archive.dest}").exists()
+            if (!file("${cachePath}/${cacheName}.tar.gz").exists()) {
+                ant.get(src: archive.src, dest: file("${cachePath}/${cacheName}.tar.gz"))
+                copyFiles = true; // force to copy files from the latest archive files
+            }
+            // Extract the target archive if its dest path does not exists
+            if (copyFiles) {
+                copy {
+                    from tarTree("${cachePath}/${cacheName}.tar.gz")
+                    into "${archive.dest}"
+                }
+            }
+        }
+    }
+}
+preBuild.dependsOn downloadAndExtractArchives

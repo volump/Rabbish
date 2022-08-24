@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="Exit" type="id" />
+    <item name="applyRight" type="id" />
+    <item name="agreement" type="id" />
+    <item name="givePoint" type="id" />
+    <item name="currentPlace" type="id" />
+    <item name="changePlace" type="id" />
+    <item name="column3" type="id" />
+    <item name="btn_web_picture" type="id" />
+    <item name="btn_open_album" type="id" />
+</resources>
